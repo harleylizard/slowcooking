@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "slowcooking",
+  "version": "1.0",
+  "name": "Slowcooking",
+  "description": "Food for cobblemon",
+  "authors": [
+    "harleylizard"
+  ],
+  "contact": {
+  },
+  "license": "All Rights Reserved",
+  "icon": "assets/slowcooking/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.harleylizard.slowcooking.common.Slowcooking"
+    ],
+    "client": [
+      "com.harleylizard.slowcooking.client.SlowcookingClient"
+    ]
+  },
+  "mixins": [
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*",
+    "fabric-language-kotlin": "*",
+    "cobblemon": "*"
+  },
+  "suggests": {
+    "cobblemon": "*"
+  }
+}
