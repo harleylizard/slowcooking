@@ -6,6 +6,7 @@
     "ItemStackMixin"
   ],
   "client": [
+    "GuiGraphicsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
