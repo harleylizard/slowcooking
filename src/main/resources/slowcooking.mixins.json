@@ -3,6 +3,9 @@
   "package": "com.harleylizard.slowcooking.mixins",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "BlockMixin",
+    "ItemDisplayBuilderMixin",
+    "ItemMixin",
     "ItemStackMixin"
   ],
   "client": [

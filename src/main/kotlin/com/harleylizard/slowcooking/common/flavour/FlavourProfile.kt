@@ -3,7 +3,9 @@ package com.harleylizard.slowcooking.common.flavour
 import com.harleylizard.slowcooking.common.Maps
 import com.harleylizard.slowcooking.common.Maps.freeze
 import com.harleylizard.slowcooking.common.Maps.object2IntMap
+import com.harleylizard.slowcooking.common.SlowcookingComponents
 import com.harleylizard.slowcooking.common.SlowcookingItemTags
+import com.harleylizard.slowcooking.common.SlowcookingItemTags.isIngredient
 import com.mojang.serialization.Codec
 import it.unimi.dsi.fastutil.objects.Object2IntArrayMap
 import it.unimi.dsi.fastutil.objects.Object2IntMap
@@ -21,6 +23,15 @@ class FlavourProfile private constructor(private val map: Object2IntMap<Flavour>
     val sourness = float(Flavour.SOUR) / MAXIMUM_FLAVOUR
 
     private fun float(flavour: Flavour) = map.getInt(flavour).toFloat()
+
+    override fun equals(other: Any?): Boolean {
+        if (other is FlavourProfile) {
+            return other.map == map
+        }
+        return super.equals(other)
+    }
+
+    override fun hashCode() = map.hashCode()
 
     companion object {
         private const val MAXIMUM_FLAVOUR = 32.0f
@@ -42,7 +53,7 @@ class FlavourProfile private constructor(private val map: Object2IntMap<Flavour>
 
         val empty = FlavourProfile(Object2IntMaps.emptyMap())
 
-        fun tags(stack: ItemStack): FlavourProfile {
+        private fun tags(stack: ItemStack): FlavourProfile {
             val map: Object2IntMap<Flavour> = Object2IntArrayMap()
             for (tag in stack.tags) {
                 Flavour.map[tag]?.let {
@@ -51,6 +62,13 @@ class FlavourProfile private constructor(private val map: Object2IntMap<Flavour>
                 }
             }
             return FlavourProfile(map.freeze)
+        }
+
+        fun apply(stack: ItemStack): ItemStack {
+            if (stack.isIngredient) {
+                stack.set(SlowcookingComponents.flavourProfile, tags(stack))
+            }
+            return stack
         }
     }
 }

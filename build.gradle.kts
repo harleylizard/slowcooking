@@ -6,6 +6,10 @@ plugins {
 group = "com.harleylizard"
 version = "1.0-SNAPSHOT"
 
+loom {
+    accessWidenerPath = file("src/main/resources/slowcooking.accesswidener")
+}
+
 repositories {
     mavenCentral()
     maven("https://maven.impactdev.net/repository/development/")

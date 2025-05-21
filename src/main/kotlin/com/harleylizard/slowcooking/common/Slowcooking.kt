@@ -24,7 +24,9 @@ class Slowcooking : ModInitializer {
         val itemGroup = FabricItemGroup.builder()
             .title(Component.translatable("slowcooking.itemGroup.name"))
             .icon { SlowcookingItems.potteryWheel.defaultInstance }
-            .displayItems { itemDisplayParameters, output ->  }
+            .displayItems { itemDisplayParameters, output ->
+
+            }
             .build()
 
     }
