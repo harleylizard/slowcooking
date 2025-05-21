@@ -1,0 +1,10 @@
+{
+  "slowcooking.tooltip.flavour.spicy": "Spicy",
+  "slowcooking.tooltip.flavour.dry": "Dry",
+  "slowcooking.tooltip.flavour.sweet": "Sweet",
+  "slowcooking.tooltip.flavour.bitter": "Bitter",
+  "slowcooking.tooltip.flavour.sour": "Sour",
+  "slowcooking.tooltip.flavour.and": "%sand %s",
+  "slowcooking.tooltip.flavour.following": "%s, ",
+  "slowcooking.tooltip.ingredient": "%s Ingredient"
+}
