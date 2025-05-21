@@ -26,16 +26,16 @@ class FlavourProfile private constructor(private val map: Object2IntMap<Flavour>
         private const val MAXIMUM_FLAVOUR = 32.0f
 
         private val amounts = Maps.object2IntMap<TagKey<Item>> {
-            put(SlowcookingItemTags.spicyIngredient, 9)
-            put(SlowcookingItemTags.dryIngredient, 9)
-            put(SlowcookingItemTags.sweetIngredient, 9)
-            put(SlowcookingItemTags.bitterIngredient, 9)
-            put(SlowcookingItemTags.sourIngredient, 9)
-            put(SlowcookingItemTags.verySpicyIngredient, 21)
-            put(SlowcookingItemTags.veryDryIngredient, 21)
-            put(SlowcookingItemTags.verySweetIngredient, 21)
-            put(SlowcookingItemTags.veryBitterIngredient, 21)
-            put(SlowcookingItemTags.verySourIngredient, 21)
+            put(SlowcookingItemTags.spicyIngredient, 15)
+            put(SlowcookingItemTags.dryIngredient, 15)
+            put(SlowcookingItemTags.sweetIngredient, 15)
+            put(SlowcookingItemTags.bitterIngredient, 15)
+            put(SlowcookingItemTags.sourIngredient, 15)
+            put(SlowcookingItemTags.verySpicyIngredient, 23)
+            put(SlowcookingItemTags.veryDryIngredient, 23)
+            put(SlowcookingItemTags.verySweetIngredient, 23)
+            put(SlowcookingItemTags.veryBitterIngredient, 23)
+            put(SlowcookingItemTags.verySourIngredient, 23)
         }
 
         val codec: Codec<FlavourProfile> = Flavour.codec.object2IntMap.xmap({ k -> FlavourProfile(k) }, { v -> v.map })
