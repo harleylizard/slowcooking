@@ -51,6 +51,10 @@ class PotteryWheel(properties: Properties) : Block(properties), EntityBlock {
 
     override fun neighborChanged(blockState: BlockState, level: Level, blockPos: BlockPos, block: Block, blockPos2: BlockPos, bl: Boolean) {
         level.setBlock(blockPos, blockState.setValue(BlockStateProperties.POWERED, level.hasNeighborSignal(blockPos)), UPDATE_ALL)
+        val blockEntity = level.getBlockEntity(blockPos)
+        if (blockEntity is PotteryWheelBlockEntity) {
+            blockEntity.animate()
+        }
         super.neighborChanged(blockState, level, blockPos, block, blockPos2, bl)
     }
 

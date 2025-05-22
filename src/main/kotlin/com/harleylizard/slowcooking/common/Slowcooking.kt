@@ -1,7 +1,9 @@
 package com.harleylizard.slowcooking.common
 
+import com.harleylizard.slowcooking.common.payload.BlockEntityToClientPayload
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.network.chat.Component
@@ -14,6 +16,8 @@ class Slowcooking : ModInitializer {
         SlowcookingItems.registerAll()
         SlowcookingComponents.registerAll()
         SlowcookingBlockEntities.registerAll()
+
+        PayloadTypeRegistry.playS2C().register(BlockEntityToClientPayload.type, BlockEntityToClientPayload.codec)
 
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, MOD_ID.resourceLocation, itemGroup)
     }

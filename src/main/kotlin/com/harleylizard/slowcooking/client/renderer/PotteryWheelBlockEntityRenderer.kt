@@ -5,6 +5,7 @@ import com.harleylizard.slowcooking.common.Slowcooking.Companion.resourceLocatio
 import com.harleylizard.slowcooking.common.block.PotteryWheel.Companion.hasClay
 import com.harleylizard.slowcooking.common.blockentity.PotteryWheelBlockEntity
 import com.mojang.blaze3d.vertex.PoseStack
+import com.mojang.math.Axis
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
@@ -15,6 +16,11 @@ class PotteryWheelBlockEntityRenderer(context: BlockEntityRendererProvider.Conte
 
     override fun render(blockEntity: PotteryWheelBlockEntity, f: Float, poseStack: PoseStack, multiBufferSource: MultiBufferSource, i: Int, j: Int) {
         poseStack.pushPose()
+        val pivot = 0.5f
+        poseStack.translate(pivot, pivot, pivot)
+        poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.angle))
+        poseStack.translate(-pivot, -pivot, -pivot)
+
         val colour = 0xFFFFFF
         Render.renderModel(disc, poseStack, multiBufferSource, discTexture, i, j, colour)
 
