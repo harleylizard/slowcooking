@@ -1,5 +1,6 @@
 package com.harleylizard.slowcooking.common.block
 
+import com.harleylizard.slowcooking.common.SlowcookingBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -10,13 +11,15 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.EntityBlock
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.phys.BlockHitResult
 
-class PotteryWheel(properties: Properties) : Block(properties) {
+class PotteryWheel(properties: Properties) : Block(properties), EntityBlock {
 
     init {
         registerDefaultState(stateDefinition.any()
@@ -47,6 +50,10 @@ class PotteryWheel(properties: Properties) : Block(properties) {
     ) {
         level.setBlock(blockPos, blockState.setValue(BlockStateProperties.POWERED, level.hasNeighborSignal(blockPos)), UPDATE_ALL)
         super.neighborChanged(blockState, level, blockPos, block, blockPos2, bl)
+    }
+
+    override fun newBlockEntity(blockPos: BlockPos, blockState: BlockState): BlockEntity? {
+        return SlowcookingBlockEntities.potteryWheel.create(blockPos, blockState)
     }
 
     companion object {

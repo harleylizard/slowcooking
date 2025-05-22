@@ -1,6 +1,6 @@
 package com.harleylizard.slowcooking.mixins;
 
-import com.harleylizard.slowcooking.client.FlavourProfileTooltip;
+import com.harleylizard.slowcooking.client.FlavourProfileGraph;
 import com.harleylizard.slowcooking.common.flavour.FlavourProfile;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.gui.GuiGraphics;
@@ -21,7 +21,7 @@ public final class GuiGraphicsMixin {
     public void slowcooking$e(Optional<TooltipComponent> instance, Consumer<TooltipComponent> action, @Local(ordinal = 1) List<ClientTooltipComponent> list2) {
         instance.ifPresent(component -> {
             if (component instanceof FlavourProfile profile) {
-                list2.add(new FlavourProfileTooltip(profile));
+                list2.add(new FlavourProfileGraph(profile));
             } else {
                 action.accept(component);
             }

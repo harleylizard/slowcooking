@@ -11,7 +11,7 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent
 import net.minecraft.client.renderer.GameRenderer
 
-class FlavourProfileTooltip(private val profile: FlavourProfile) : ClientTooltipComponent {
+class FlavourProfileGraph(private val profile: FlavourProfile) : ClientTooltipComponent {
     override fun getHeight() = 30
 
     override fun getWidth(font: Font) = 30
@@ -20,14 +20,15 @@ class FlavourProfileTooltip(private val profile: FlavourProfile) : ClientTooltip
         val pose = guiGraphics.pose()
         pose.pushPose()
         pose.translate(i.toFloat(), j.toFloat(), 0.0f)
-        RenderSystem.setShader(GameRenderer::getPositionTexShader)
+        RenderSystem.setShader(GameRenderer::getPositionColorShader)
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         val last = pose.last().pose()
         val buffer = Tesselator.getInstance().begin(VertexFormat.Mode.TRIANGLES, DefaultVertexFormat.POSITION_COLOR)
 
         val size = height.toFloat()
         val d = (0.15f / 1.0f) * size
 
-        val t = 0.75f
+        val t = 1.0f
         val r = 1.0f
         val g = 1.0f
         val b = 1.0f

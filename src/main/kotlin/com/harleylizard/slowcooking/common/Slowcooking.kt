@@ -13,6 +13,7 @@ class Slowcooking : ModInitializer {
         SlowcookingBlocks.registerAll()
         SlowcookingItems.registerAll()
         SlowcookingComponents.registerAll()
+        SlowcookingBlockEntities.registerAll()
 
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, MOD_ID.resourceLocation, itemGroup)
     }

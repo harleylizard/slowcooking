@@ -23,12 +23,7 @@ class FlavourProfile private constructor(private val map: Object2IntMap<Flavour>
 
     private fun float(flavour: Flavour) = map.getInt(flavour).toFloat()
 
-    override fun equals(other: Any?): Boolean {
-        if (other is FlavourProfile) {
-            return other.map == map
-        }
-        return super.equals(other)
-    }
+    override fun equals(other: Any?) = if (other is FlavourProfile) other.map == map else super.equals(other)
 
     override fun hashCode() = map.hashCode()
 
