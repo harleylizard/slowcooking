@@ -15,7 +15,7 @@ object SlowcookingComponents {
         register("flavour_profile", flavourProfile)
     }
 
-    private fun <T> register(name: String, component: DataComponentType<T>) {
+    fun <T> register(name: String, component: DataComponentType<T>) {
         Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, name.resourceLocation, component)
     }
 }

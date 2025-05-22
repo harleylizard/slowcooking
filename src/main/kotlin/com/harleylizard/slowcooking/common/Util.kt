@@ -34,7 +34,7 @@ object Util {
         takeBack(player, item.defaultInstance.copy(), blockPos)
     }
 
-    fun takeBack(player: Player, itemStack: ItemStack, blockPos: BlockPos) {
+    private fun takeBack(player: Player, itemStack: ItemStack, blockPos: BlockPos) {
         if (!player.addItem(itemStack)) {
             Block.popResource(player.level(), blockPos, itemStack)
         }

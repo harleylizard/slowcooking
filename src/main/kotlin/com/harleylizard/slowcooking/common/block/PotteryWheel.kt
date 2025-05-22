@@ -41,8 +41,16 @@ class PotteryWheel(properties: Properties) : Block(properties), EntityBlock {
     override fun useWithoutItem(blockState: BlockState, level: Level, blockPos: BlockPos, player: Player, blockHitResult: BlockHitResult): InteractionResult {
         if (blockState.hasClay) {
             val client = level.isClientSide
-            if (!client && level.setBlock(blockPos, blockState.setValue(hasClay, false), UPDATE_ALL)) {
-                Util.takeBack(player, Items.CLAY, blockPos)
+            if (!client) {
+                if (player.isCrouching) {
+                    if (level.setBlock(blockPos, blockState.setValue(hasClay, false), UPDATE_ALL)) {
+                        Util.takeBack(player, Items.CLAY, blockPos)
+                    }
+                } else if (blockState.powered) {
+                    level.getBlockEntity(blockPos, SlowcookingBlockEntities.potteryWheel).ifPresent { entity ->
+                        entity.use(System.currentTimeMillis())
+                    }
+                }
                 level.playSound(null, blockPos, SoundEvents.MUD_HIT, SoundSource.BLOCKS)
             }
             return InteractionResult.sidedSuccess(client)
@@ -54,7 +62,9 @@ class PotteryWheel(properties: Properties) : Block(properties), EntityBlock {
         if (itemStack.`is`(Items.CLAY)) {
             val client = level.isClientSide
             if (!client && !blockState.hasClay && level.setBlock(blockPos, blockState.setValue(hasClay, true), UPDATE_ALL)) {
+                itemStack.shrink(1)
                 level.playSound(null, blockPos, SoundEvents.MUD_STEP, SoundSource.BLOCKS)
+                level.getBlockEntity(blockPos, SlowcookingBlockEntities.potteryWheel).ifPresent { entity -> entity.previous = System.currentTimeMillis() }
             }
             return ItemInteractionResult.sidedSuccess(client)
         }

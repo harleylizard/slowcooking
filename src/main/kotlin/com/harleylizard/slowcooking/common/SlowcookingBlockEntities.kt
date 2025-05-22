@@ -14,7 +14,7 @@ object SlowcookingBlockEntities {
         register("pottery_wheel", potteryWheel)
     }
 
-    private fun register(name: String, type: BlockEntityType<out BlockEntity>) {
+    fun register(name: String, type: BlockEntityType<out BlockEntity>) {
         Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, name.resourceLocation, type)
     }
 }
