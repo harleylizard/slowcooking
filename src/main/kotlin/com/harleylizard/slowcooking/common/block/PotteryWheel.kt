@@ -1,6 +1,7 @@
 package com.harleylizard.slowcooking.common.block
 
 import com.harleylizard.slowcooking.common.SlowcookingBlockEntities
+import com.harleylizard.slowcooking.common.blockentity.PotteryWheelBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -10,9 +11,12 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.BaseEntityBlock
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.EntityBlock
 import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.entity.BlockEntityTicker
+import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -54,6 +58,12 @@ class PotteryWheel(properties: Properties) : Block(properties), EntityBlock {
 
     override fun newBlockEntity(blockPos: BlockPos, blockState: BlockState): BlockEntity? {
         return SlowcookingBlockEntities.potteryWheel.create(blockPos, blockState)
+    }
+
+    override fun <T : BlockEntity?> getTicker(level: Level, blockState: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
+        return if (level.isClientSide)
+            BaseEntityBlock.createTickerHelper(blockEntityType, SlowcookingBlockEntities.potteryWheel, PotteryWheelBlockEntity::clientTick) else
+            BaseEntityBlock.createTickerHelper(blockEntityType, SlowcookingBlockEntities.potteryWheel, PotteryWheelBlockEntity::serverTick)
     }
 
     companion object {
