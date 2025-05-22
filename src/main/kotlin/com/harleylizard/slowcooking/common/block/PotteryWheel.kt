@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
 import net.minecraft.world.ItemInteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
@@ -34,6 +35,10 @@ class PotteryWheel(properties: Properties) : Block(properties), EntityBlock {
         builder.add(hasClay).add(BlockStateProperties.POWERED)
     }
 
+    override fun useWithoutItem(blockState: BlockState, level: Level, blockPos: BlockPos, player: Player, blockHitResult: BlockHitResult): InteractionResult {
+        return super.useWithoutItem(blockState, level, blockPos, player, blockHitResult)
+    }
+
     override fun useItemOn(itemStack: ItemStack, blockState: BlockState, level: Level, blockPos: BlockPos, player: Player, interactionHand: InteractionHand, blockHitResult: BlockHitResult): ItemInteractionResult {
         if (itemStack.`is`(Items.CLAY)) {
             if (!level.isClientSide && !blockState.getValue(hasClay) && level.setBlock(blockPos, blockState.setValue(hasClay, true), UPDATE_ALL)) {
@@ -44,14 +49,7 @@ class PotteryWheel(properties: Properties) : Block(properties), EntityBlock {
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
     }
 
-    override fun neighborChanged(
-        blockState: BlockState,
-        level: Level,
-        blockPos: BlockPos,
-        block: Block,
-        blockPos2: BlockPos,
-        bl: Boolean
-    ) {
+    override fun neighborChanged(blockState: BlockState, level: Level, blockPos: BlockPos, block: Block, blockPos2: BlockPos, bl: Boolean) {
         level.setBlock(blockPos, blockState.setValue(BlockStateProperties.POWERED, level.hasNeighborSignal(blockPos)), UPDATE_ALL)
         super.neighborChanged(blockState, level, blockPos, block, blockPos2, bl)
     }
@@ -68,6 +66,10 @@ class PotteryWheel(properties: Properties) : Block(properties), EntityBlock {
 
     companion object {
         val hasClay: BooleanProperty = BooleanProperty.create("has_clay")
+
+        val BlockState.hasClay: Boolean get() = getValue(Companion.hasClay)
+
+        val BlockState.powered: Boolean get() = getValue(BlockStateProperties.POWERED)
 
     }
 }
