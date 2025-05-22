@@ -3,6 +3,8 @@ package com.harleylizard.slowcooking.common.blockentity
 import com.harleylizard.slowcooking.common.SlowcookingBlockEntities
 import com.harleylizard.slowcooking.common.block.PotteryWheel
 import it.unimi.dsi.fastutil.longs.LongArraySet
+import it.unimi.dsi.fastutil.longs.LongIterable
+import it.unimi.dsi.fastutil.longs.LongIterator
 import it.unimi.dsi.fastutil.longs.LongSet
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -19,32 +21,20 @@ import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
 class PotteryWheelBlockEntity(blockPos: BlockPos, blockState: BlockState) : BlockEntity(SlowcookingBlockEntities.potteryWheel, blockPos, blockState) {
-    private val set: LongSet = LongArraySet()
-
-    var previous = 0L
+    private val times = Times()
 
     val animation = PotteryWheelAnimation()
 
     override fun saveAdditional(compoundTag: CompoundTag, provider: HolderLookup.Provider) {
         super.saveAdditional(compoundTag, provider)
         animation.save(compoundTag)
-        val list = ListTag()
-        for (l in set.longStream()) {
-            list.add(LongTag.valueOf(l))
-        }
-        compoundTag.put("Set", list)
-        compoundTag.putLong("Previous", previous)
+        times.save(compoundTag)
     }
 
     override fun loadAdditional(compoundTag: CompoundTag, provider: HolderLookup.Provider) {
         super.loadAdditional(compoundTag, provider)
         animation.load(compoundTag)
-        set.clear()
-        val list = compoundTag.getLongArray("Set")
-        for (i in list) {
-            set.add(i)
-        }
-        previous = compoundTag.getLong("Previous")
+        times.load(compoundTag)
     }
 
     override fun getUpdatePacket() = ClientboundBlockEntityDataPacket.create(this)
@@ -52,18 +42,19 @@ class PotteryWheelBlockEntity(blockPos: BlockPos, blockState: BlockState) : Bloc
     override fun getUpdateTag(provider: HolderLookup.Provider): CompoundTag {
         val tag = CompoundTag()
         animation.forUpdate(tag)
+        times.save(tag)
         return tag
     }
 
-    fun use(timestamp: Long) {
-        set.add(timestamp)
-        val size = set.size
+    fun use() {
+        times.add()
+        val size = times.size
         if (size >= 10) {
             level?.let {
                 it.setBlock(blockPos, blockState.setValue(PotteryWheel.hasClay, false), Block.UPDATE_ALL)
                 var average = 0L
-                var k = previous
-                for (l in set.longStream()) {
+                var k = times.previous
+                for (l in times.longIterator()) {
                     average += abs(l - k)
                     k = l
                 }
@@ -74,9 +65,13 @@ class PotteryWheelBlockEntity(blockPos: BlockPos, blockState: BlockState) : Bloc
                 } else {
                     Block.popResource(it, blockPos, Items.DIRT.defaultInstance.copy())
                 }
-                set.clear()
+                times.clean()
             }
         }
+    }
+
+    fun set() {
+        times.set()
     }
 
     companion object {
@@ -87,6 +82,46 @@ class PotteryWheelBlockEntity(blockPos: BlockPos, blockState: BlockState) : Bloc
 
         fun clientTick(level: Level, blockPos: BlockPos, blockState: BlockState, blockEntity: PotteryWheelBlockEntity) {
             blockEntity.animation.tick(blockState)
+        }
+
+        class Times : LongIterable {
+            private val set: LongSet = LongArraySet()
+
+            var previous = 0L; private set
+
+            val size get() = set.size
+
+            fun save(tag: CompoundTag) {
+                val list = ListTag()
+                for (l in set.longStream()) {
+                    list.add(LongTag.valueOf(l))
+                }
+                tag.put("Set", list)
+                tag.putLong("Previous", previous)
+            }
+
+            fun load(tag: CompoundTag) {
+                clean()
+                val list = tag.getLongArray("Set")
+                for (i in list) {
+                    set.add(i)
+                }
+                previous = tag.getLong("Previous")
+            }
+
+            fun set() {
+                previous = System.currentTimeMillis()
+            }
+
+            fun add() {
+                set.add(System.currentTimeMillis())
+            }
+
+            fun clean() {
+                set.clear()
+            }
+
+            override fun iterator(): LongIterator = set.longIterator()
         }
     }
 }

@@ -45,13 +45,14 @@ class PotteryWheel(properties: Properties) : Block(properties), EntityBlock {
                 if (player.isCrouching) {
                     if (level.setBlock(blockPos, blockState.setValue(hasClay, false), UPDATE_ALL)) {
                         Util.takeBack(player, Items.CLAY, blockPos)
+                        level.playSound(null, blockPos, SoundEvents.MUD_HIT, SoundSource.BLOCKS)
                     }
                 } else if (blockState.powered) {
                     level.getBlockEntity(blockPos, SlowcookingBlockEntities.potteryWheel).ifPresent { entity ->
-                        entity.use(System.currentTimeMillis())
+                        entity.use()
+                        level.playSound(null, blockPos, SoundEvents.MUD_HIT, SoundSource.BLOCKS)
                     }
                 }
-                level.playSound(null, blockPos, SoundEvents.MUD_HIT, SoundSource.BLOCKS)
             }
             return InteractionResult.sidedSuccess(client)
         }
@@ -64,7 +65,7 @@ class PotteryWheel(properties: Properties) : Block(properties), EntityBlock {
             if (!client && !blockState.hasClay && level.setBlock(blockPos, blockState.setValue(hasClay, true), UPDATE_ALL)) {
                 itemStack.shrink(1)
                 level.playSound(null, blockPos, SoundEvents.MUD_STEP, SoundSource.BLOCKS)
-                level.getBlockEntity(blockPos, SlowcookingBlockEntities.potteryWheel).ifPresent { entity -> entity.previous = System.currentTimeMillis() }
+                level.getBlockEntity(blockPos, SlowcookingBlockEntities.potteryWheel).ifPresent { entity -> entity.set() }
             }
             return ItemInteractionResult.sidedSuccess(client)
         }

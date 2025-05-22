@@ -24,7 +24,7 @@ class PotteryWheelAnimation {
             val step = 0.5f
             val axis = if (blockState.powered && blockState.hasClay) step else -step
             speed += axis
-            speed = Math.min(Math.max(speed, 0.0f), 8.0f)
+            speed = Math.min(Math.max(speed, 0.0f), 6.0f)
         }
     }
 
