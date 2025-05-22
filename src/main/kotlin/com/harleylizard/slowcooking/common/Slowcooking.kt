@@ -6,6 +6,7 @@ import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.item.CreativeModeTab
 
 class Slowcooking : ModInitializer {
     override fun onInitialize() {
@@ -21,11 +22,16 @@ class Slowcooking : ModInitializer {
 
         val String.resourceLocation: ResourceLocation get() = ResourceLocation.fromNamespaceAndPath(MOD_ID, this)
 
-        val itemGroup = FabricItemGroup.builder()
+        val itemGroup: CreativeModeTab = FabricItemGroup.builder()
             .title(Component.translatable("slowcooking.itemGroup.name"))
             .icon { SlowcookingItems.potteryWheel.defaultInstance }
             .displayItems { itemDisplayParameters, output ->
-
+                output.accept(SlowcookingItems.potteryWheel)
+                output.accept(SlowcookingItems.spicyHam)
+                output.accept(SlowcookingItems.dryWing)
+                output.accept(SlowcookingItems.sweetTenderloin)
+                output.accept(SlowcookingItems.bitterNectar)
+                output.accept(SlowcookingItems.sourTooth)
             }
             .build()
 

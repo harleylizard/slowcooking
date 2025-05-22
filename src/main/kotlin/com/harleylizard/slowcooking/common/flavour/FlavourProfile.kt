@@ -1,6 +1,5 @@
 package com.harleylizard.slowcooking.common.flavour
 
-import com.harleylizard.slowcooking.common.Maps
 import com.harleylizard.slowcooking.common.Maps.freeze
 import com.harleylizard.slowcooking.common.Maps.object2IntMap
 import com.harleylizard.slowcooking.common.SlowcookingComponents
@@ -36,7 +35,7 @@ class FlavourProfile private constructor(private val map: Object2IntMap<Flavour>
     companion object {
         private const val MAXIMUM_FLAVOUR = 32.0f
 
-        private val amounts = Maps.object2IntMap<TagKey<Item>> {
+        private val amounts = object2IntMap<TagKey<Item>> {
             put(SlowcookingItemTags.spicyIngredient, 15)
             put(SlowcookingItemTags.dryIngredient, 15)
             put(SlowcookingItemTags.sweetIngredient, 15)

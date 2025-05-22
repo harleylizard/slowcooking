@@ -6,5 +6,12 @@
   "slowcooking.tooltip.flavour.sour": "Sour",
   "slowcooking.tooltip.flavour.and": "%sand %s",
   "slowcooking.tooltip.flavour.following": "%s, ",
-  "slowcooking.tooltip.ingredient": "%s Ingredient"
+  "slowcooking.tooltip.ingredient": "%s Ingredient",
+  "slowcooking.itemGroup.name": "Slowcooking",
+  "block.slowcooking.pottery_wheel": "Pottery Wheel",
+  "item.slowcooking.spicy_ham": "Spicy Ham",
+  "item.slowcooking.dry_wing": "Dry Wing",
+  "item.slowcooking.sweet_tenderloin": "Sweet Tenderloin",
+  "item.slowcooking.bitter_nectar": "Bitter Nectar",
+  "item.slowcooking.sour_tooth": "Sour Tooth"
 }

@@ -32,10 +32,10 @@ enum class Flavour(val tooltip: Component) {
             SlowcookingItemTags.bitterIngredient to BITTER,
             SlowcookingItemTags.sourIngredient to SOUR,
             SlowcookingItemTags.verySpicyIngredient to SPICY,
-            SlowcookingItemTags.veryDryIngredient to SPICY,
-            SlowcookingItemTags.verySweetIngredient to SPICY,
-            SlowcookingItemTags.veryBitterIngredient to SPICY,
-            SlowcookingItemTags.verySourIngredient to SPICY
+            SlowcookingItemTags.veryDryIngredient to DRY,
+            SlowcookingItemTags.verySweetIngredient to SWEET,
+            SlowcookingItemTags.veryBitterIngredient to BITTER,
+            SlowcookingItemTags.verySourIngredient to SOUR
         ).freeze
 
         fun tooltip(stack: ItemStack): Component {
