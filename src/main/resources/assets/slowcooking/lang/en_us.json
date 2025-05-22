@@ -9,6 +9,11 @@
   "slowcooking.tooltip.ingredient": "%s Ingredient",
   "slowcooking.itemGroup.name": "Slowcooking",
   "block.slowcooking.pottery_wheel": "Pottery Wheel",
+  "item.slowcooking.unfired_ceramic_plate": "Unfired Ceramic Plate",
+  "item.slowcooking.unfired_ceramic_bowl": "Unfired Ceramic Bowl",
+  "item.slowcooking.ceramic_plate": "Ceramic Plate",
+  "item.slowcooking.ceramic_bowl": "Ceramic Bowl",
+
   "item.slowcooking.spicy_ham": "Spicy Ham",
   "item.slowcooking.dry_wing": "Dry Wing",
   "item.slowcooking.sweet_tenderloin": "Sweet Tenderloin",

@@ -30,8 +30,13 @@ class Slowcooking : ModInitializer {
         val itemGroup: CreativeModeTab = FabricItemGroup.builder()
             .title(Component.translatable("slowcooking.itemGroup.name"))
             .icon { SlowcookingItems.potteryWheel.defaultInstance }
-            .displayItems { itemDisplayParameters, output ->
+            .displayItems { _, output ->
                 output.accept(SlowcookingItems.potteryWheel)
+                output.accept(SlowcookingItems.unfiredCeramicPlate)
+                output.accept(SlowcookingItems.unfiredCeramicBowl)
+                output.accept(SlowcookingItems.ceramicPlate)
+                output.accept(SlowcookingItems.ceramicBowl)
+
                 output.accept(SlowcookingItems.spicyHam)
                 output.accept(SlowcookingItems.dryWing)
                 output.accept(SlowcookingItems.sweetTenderloin)

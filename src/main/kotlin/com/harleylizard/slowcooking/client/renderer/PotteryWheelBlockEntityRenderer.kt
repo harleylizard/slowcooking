@@ -12,8 +12,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 import kotlin.math.abs
 import kotlin.math.ceil
-import kotlin.math.floor
-import kotlin.math.roundToInt
 
 class PotteryWheelBlockEntityRenderer(context: BlockEntityRendererProvider.Context) : BlockEntityRenderer<PotteryWheelBlockEntity> {
     private val disc = PotteryWheelDisc(context.bakeLayer(SlowcookingModelLayers.potteryWheelDisc))
@@ -57,7 +55,6 @@ class PotteryWheelBlockEntityRenderer(context: BlockEntityRendererProvider.Conte
     companion object {
         private val discTexture = "textures/entity/pottery_wheel/disc.png".resourceLocation
         private val clayTexture = "textures/entity/pottery_wheel/clay.png".resourceLocation
-
 
     }
 }

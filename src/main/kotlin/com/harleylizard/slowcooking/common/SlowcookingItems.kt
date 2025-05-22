@@ -11,6 +11,11 @@ object SlowcookingItems {
     private val Block.blockItem get() = BlockItem(this, Item.Properties())
 
     val potteryWheel = SlowcookingBlocks.potteryWheel.blockItem
+    val unfiredCeramicPlate = Item(Item.Properties())
+    val unfiredCeramicBowl = Item(Item.Properties())
+    val ceramicPlate = Item(Item.Properties())
+    val ceramicBowl = Item(Item.Properties())
+
     val spicyHam = Item(Item.Properties())
     val dryWing = Item(Item.Properties())
     val sweetTenderloin = Item(Item.Properties())
@@ -19,6 +24,11 @@ object SlowcookingItems {
 
     fun registerAll() {
         register("pottery_wheel", potteryWheel)
+        register("unfired_ceramic_plate", unfiredCeramicPlate)
+        register("unfired_ceramic_bowl", unfiredCeramicBowl)
+        register("ceramic_plate", ceramicPlate)
+        register("ceramic_bowl", ceramicBowl)
+
         register("spicy_ham", spicyHam)
         register("dry_wing", dryWing)
         register("sweet_tenderloin", sweetTenderloin)

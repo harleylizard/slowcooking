@@ -1,6 +1,7 @@
 package com.harleylizard.slowcooking.common.blockentity
 
 import com.harleylizard.slowcooking.common.SlowcookingBlockEntities
+import com.harleylizard.slowcooking.common.SlowcookingItems
 import com.harleylizard.slowcooking.common.block.PotteryWheel
 import it.unimi.dsi.fastutil.longs.LongArraySet
 import it.unimi.dsi.fastutil.longs.LongIterable
@@ -12,7 +13,6 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.ListTag
 import net.minecraft.nbt.LongTag
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
-import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.entity.BlockEntity
@@ -61,9 +61,9 @@ class PotteryWheelBlockEntity(blockPos: BlockPos, blockState: BlockState) : Bloc
                 average /= size
                 val seconds = TimeUnit.MILLISECONDS.toSeconds(average)
                 if (seconds >= 2) {
-                    Block.popResource(it, blockPos, Items.CLAY.defaultInstance.copy())
+                    Block.popResource(it, blockPos, SlowcookingItems.unfiredCeramicBowl.defaultInstance.copy())
                 } else {
-                    Block.popResource(it, blockPos, Items.DIRT.defaultInstance.copy())
+                    Block.popResource(it, blockPos, SlowcookingItems.unfiredCeramicPlate.defaultInstance.copy())
                 }
                 times.clean()
             }
