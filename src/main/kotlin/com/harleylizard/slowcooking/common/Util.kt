@@ -4,9 +4,14 @@ import com.mojang.serialization.Codec
 import it.unimi.dsi.fastutil.objects.Object2IntArrayMap
 import it.unimi.dsi.fastutil.objects.Object2IntMap
 import it.unimi.dsi.fastutil.objects.Object2IntMaps
+import net.minecraft.core.BlockPos
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.block.Block
 import java.util.*
 
-object Maps {
+object Util {
     val <K, V> Map<K, V>.freeze: Map<K, V> get() = Collections.unmodifiableMap(this)
 
     val <T> Object2IntMap<T>.freeze: Object2IntMap<T> get() = Object2IntMaps.unmodifiable(this)
@@ -25,4 +30,13 @@ object Maps {
 
     fun <T> object2IntMap(unit: Object2IntMap<T>.() -> Unit) = Object2IntArrayMap<T>().also(unit).freeze
 
+    fun takeBack(player: Player, item: Item, blockPos: BlockPos) {
+        takeBack(player, item.defaultInstance.copy(), blockPos)
+    }
+
+    fun takeBack(player: Player, itemStack: ItemStack, blockPos: BlockPos) {
+        if (!player.addItem(itemStack)) {
+            Block.popResource(player.level(), blockPos, itemStack)
+        }
+    }
 }

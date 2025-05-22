@@ -1,7 +1,7 @@
 package com.harleylizard.slowcooking.common.flavour
 
-import com.harleylizard.slowcooking.common.Maps.freeze
-import com.harleylizard.slowcooking.common.Maps.object2IntMap
+import com.harleylizard.slowcooking.common.Util.freeze
+import com.harleylizard.slowcooking.common.Util.object2IntMap
 import com.harleylizard.slowcooking.common.SlowcookingComponents
 import com.harleylizard.slowcooking.common.SlowcookingItemTags
 import com.harleylizard.slowcooking.common.SlowcookingItemTags.isIngredient

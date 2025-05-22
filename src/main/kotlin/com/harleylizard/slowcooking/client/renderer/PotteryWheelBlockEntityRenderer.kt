@@ -18,7 +18,10 @@ class PotteryWheelBlockEntityRenderer(context: BlockEntityRendererProvider.Conte
         poseStack.pushPose()
         val pivot = 0.5f
         poseStack.translate(pivot, pivot, pivot)
-        poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.angle))
+        val animation = blockEntity.animation
+        animation.angle += animation.speed * f
+
+        poseStack.mulPose(Axis.YP.rotationDegrees(animation.angle))
         poseStack.translate(-pivot, -pivot, -pivot)
 
         val colour = 0xFFFFFF

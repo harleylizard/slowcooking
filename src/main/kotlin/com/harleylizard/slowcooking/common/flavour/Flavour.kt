@@ -1,6 +1,6 @@
 package com.harleylizard.slowcooking.common.flavour
 
-import com.harleylizard.slowcooking.common.Maps.freeze
+import com.harleylizard.slowcooking.common.Util.freeze
 import com.harleylizard.slowcooking.common.SlowcookingItemTags
 import com.mojang.serialization.Codec
 import net.minecraft.network.chat.Component
