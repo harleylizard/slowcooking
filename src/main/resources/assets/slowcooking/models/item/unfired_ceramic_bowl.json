@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "slowcooking:item/unfired_ceramic_bowl"
+  }
+}
