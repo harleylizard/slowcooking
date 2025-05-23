@@ -15,9 +15,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType
 
 @JvmRecord
 data class BlockEntityToClientPayload(
-    val type: BlockEntityType<out BlockEntity>,
-    val blockPos: BlockPos,
-    val tag: CompoundTag) : CustomPacketPayload {
+    val type: BlockEntityType<out BlockEntity>, val blockPos: BlockPos, val tag: CompoundTag) : CustomPacketPayload {
 
     override fun type() = Companion.type
 

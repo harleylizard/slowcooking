@@ -1,11 +1,11 @@
 {
-  "slowcooking.tooltip.flavour.spicy": "Spicy",
-  "slowcooking.tooltip.flavour.dry": "Dry",
-  "slowcooking.tooltip.flavour.sweet": "Sweet",
-  "slowcooking.tooltip.flavour.bitter": "Bitter",
-  "slowcooking.tooltip.flavour.sour": "Sour",
+  "slowcooking.flavour.spicy": "Spicy",
+  "slowcooking.flavour.dry": "Dry",
+  "slowcooking.flavour.sweet": "Sweet",
+  "slowcooking.flavour.bitter": "Bitter",
+  "slowcooking.flavour.sour": "Sour",
   "slowcooking.tooltip.flavour.and": "%sand %s",
-  "slowcooking.tooltip.flavour.following": "%s, ",
+  "slowcooking.tooltip.flavour.comma": "%s, ",
   "slowcooking.tooltip.ingredient": "%s Ingredient",
   "slowcooking.itemGroup.name": "Slowcooking",
   "block.slowcooking.pottery_wheel": "Pottery Wheel",
@@ -18,5 +18,6 @@
   "item.slowcooking.dry_wing": "Dry Wing",
   "item.slowcooking.sweet_tenderloin": "Sweet Tenderloin",
   "item.slowcooking.bitter_nectar": "Bitter Nectar",
-  "item.slowcooking.sour_tooth": "Sour Tooth"
+  "item.slowcooking.sour_tooth": "Sour Tooth",
+  "item.slowcooking.fresh_honey": "Fresh Honey"
 }

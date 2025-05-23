@@ -1,10 +1,10 @@
 package com.harleylizard.slowcooking.common.flavour
 
-import com.harleylizard.slowcooking.common.Util.freeze
-import com.harleylizard.slowcooking.common.Util.object2IntMap
 import com.harleylizard.slowcooking.common.SlowcookingComponents
 import com.harleylizard.slowcooking.common.SlowcookingItemTags
 import com.harleylizard.slowcooking.common.SlowcookingItemTags.isIngredient
+import com.harleylizard.slowcooking.common.Util.freeze
+import com.harleylizard.slowcooking.common.Util.object2IntMap
 import com.mojang.serialization.Codec
 import it.unimi.dsi.fastutil.objects.Object2IntArrayMap
 import it.unimi.dsi.fastutil.objects.Object2IntMap
@@ -15,13 +15,12 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 
 class FlavourProfile private constructor(private val map: Object2IntMap<Flavour>) : TooltipComponent {
-    val spiciness = float(Flavour.SPICY) / MAXIMUM_FLAVOUR
-    val dryness = float(Flavour.DRY) / MAXIMUM_FLAVOUR
-    val sweetness = float(Flavour.SWEET) / MAXIMUM_FLAVOUR
-    val bitterness = float(Flavour.BITTER) / MAXIMUM_FLAVOUR
-    val sourness = float(Flavour.SOUR) / MAXIMUM_FLAVOUR
-
-    private fun float(flavour: Flavour) = map.getInt(flavour).toFloat()
+    val spiciness = float(Flavour.SPICY)
+    val dryness = float(Flavour.DRY)
+    val sweetness = float(Flavour.SWEET)
+    val bitterness = float(Flavour.BITTER)
+    val sourness = float(Flavour.SOUR)
+    private fun float(flavour: Flavour) = map.getInt(flavour).toFloat() / MAXIMUM_FLAVOUR
 
     override fun equals(other: Any?) = if (other is FlavourProfile) other.map == map else super.equals(other)
 
@@ -50,7 +49,7 @@ class FlavourProfile private constructor(private val map: Object2IntMap<Flavour>
         private fun tags(stack: ItemStack): FlavourProfile {
             val map: Object2IntMap<Flavour> = Object2IntArrayMap()
             for (tag in stack.tags) {
-                Flavour.map[tag]?.let {
+                SlowcookingItemTags.map[tag]?.let {
                     val previous = map.getInt(it)
                     map.put(it, previous.coerceAtLeast(amounts.getInt(tag)))
                 }
@@ -60,7 +59,10 @@ class FlavourProfile private constructor(private val map: Object2IntMap<Flavour>
 
         fun apply(stack: ItemStack): ItemStack {
             if (stack.isIngredient) {
-                stack.set(SlowcookingComponents.flavourProfile, tags(stack))
+                val component = SlowcookingComponents.flavourProfile
+                if (!stack.has(component)) {
+                    stack.set(component, tags(stack))
+                }
             }
             return stack
         }

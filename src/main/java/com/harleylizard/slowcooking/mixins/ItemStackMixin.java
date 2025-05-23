@@ -35,7 +35,7 @@ public final class ItemStackMixin {
     @Inject(method = "getTooltipLines", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;addToTooltip(Lnet/minecraft/core/component/DataComponentType;Lnet/minecraft/world/item/Item$TooltipContext;Ljava/util/function/Consumer;Lnet/minecraft/world/item/TooltipFlag;)V", ordinal = 6, shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILSOFT)
     public void slowcooking$getTooltipLines(Item.TooltipContext tooltipContext, @Nullable Player player, TooltipFlag tooltipFlag, CallbackInfoReturnable<List<Component>> cir, List list, MutableComponent mutableComponent, Consumer consumer) {
         if (ingredient()) {
-            consumer.accept(Component.translatable("slowcooking.tooltip.ingredient", Flavour.Companion.tooltip(((ItemStack) (Object) this)).getString()).withStyle(ChatFormatting.BLUE));
+            consumer.accept(Component.translatable("slowcooking.tooltip.ingredient", Flavour.Companion.tooltipOf(((ItemStack) (Object) this)).getString()).withStyle(ChatFormatting.BLUE));
         }
     }
 

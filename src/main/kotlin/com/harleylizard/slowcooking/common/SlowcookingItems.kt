@@ -21,6 +21,7 @@ object SlowcookingItems {
     val sweetTenderloin = Item(Item.Properties())
     val bitterNectar = Item(Item.Properties())
     val sourTooth = Item(Item.Properties())
+    val freshHoney = Item(Item.Properties())
 
     fun registerAll() {
         register("pottery_wheel", potteryWheel)
@@ -34,6 +35,7 @@ object SlowcookingItems {
         register("sweet_tenderloin", sweetTenderloin)
         register("bitter_nectar", bitterNectar)
         register("sour_tooth", sourTooth)
+        register("fresh_honey", freshHoney)
     }
 
     fun register(name: String, item: Item) {

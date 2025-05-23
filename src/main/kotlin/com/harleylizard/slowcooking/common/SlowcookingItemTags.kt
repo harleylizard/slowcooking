@@ -1,6 +1,9 @@
 package com.harleylizard.slowcooking.common
 
 import com.harleylizard.slowcooking.common.Slowcooking.Companion.resourceLocation
+import com.harleylizard.slowcooking.common.Util.freeze
+import com.harleylizard.slowcooking.common.flavour.Flavour
+
 import net.minecraft.core.registries.Registries
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
@@ -20,6 +23,19 @@ object SlowcookingItemTags {
     val verySweetIngredient = "very_sweet_ingredient".tag
     val veryBitterIngredient = "very_bitter_ingredient".tag
     val verySourIngredient = "very_sour_ingredient".tag
+
+    val map = mapOf(
+        spicyIngredient to Flavour.SPICY,
+        dryIngredient to Flavour.DRY,
+        sweetIngredient to Flavour.SWEET,
+        bitterIngredient to Flavour.BITTER,
+        sourIngredient to Flavour.SOUR,
+        verySpicyIngredient to Flavour.SPICY,
+        veryDryIngredient to Flavour.DRY,
+        verySweetIngredient to Flavour.SWEET,
+        veryBitterIngredient to Flavour.BITTER,
+        verySourIngredient to Flavour.SOUR
+    ).freeze
 
     val ItemStack.isIngredient get() = tags.anyMatch { tag ->
         tag == spicyIngredient ||

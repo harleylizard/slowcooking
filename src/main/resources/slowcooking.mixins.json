@@ -4,9 +4,12 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "BlockMixin",
+    "DropTableMixin",
     "ItemDisplayBuilderMixin",
+    "ItemDropEntryMixin",
     "ItemMixin",
-    "ItemStackMixin"
+    "ItemStackMixin",
+    "PokemonSpeciesMixin"
   ],
   "client": [
     "GuiGraphicsMixin"

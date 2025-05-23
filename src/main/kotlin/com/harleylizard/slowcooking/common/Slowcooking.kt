@@ -42,6 +42,7 @@ class Slowcooking : ModInitializer {
                 output.accept(SlowcookingItems.sweetTenderloin)
                 output.accept(SlowcookingItems.bitterNectar)
                 output.accept(SlowcookingItems.sourTooth)
+                output.accept(SlowcookingItems.freshHoney)
             }
             .build()
 
